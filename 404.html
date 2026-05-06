@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tony's Firewall Generator</title>
+  <script>
+    // GitHub Pages SPA routing fix.
+    // Encodes the requested path into a query param and redirects to the root,
+    // where index.html will decode it and restore the path via history.replaceState.
+    var l = window.location;
+    var segmentCount = 1; // number of path segments in the repo name (firewall-generator = 1)
+    var path = l.pathname.slice(1).split('/').slice(segmentCount).join('/');
+    var redirect = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' + path +
+      (l.search ? '&q=' + l.search.slice(1) : '') +
+      l.hash;
+    window.location.replace(redirect);
+  </script>
+</head>
+<body></body>
+</html>
