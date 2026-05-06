@@ -22,13 +22,12 @@
   <script>
     // Restore path encoded by 404.html redirect (GitHub Pages SPA routing fix)
     (function() {
-      var params = new URLSearchParams(window.location.search);
-      var p = params.get('p');
-      if (p) {
-        var q = params.get('q');
-        var hash = window.location.hash;
-        var url = window.location.pathname.replace(/\/$/, '') + p + (q ? '?' + q : '') + hash;
-        window.history.replaceState(null, null, url);
+      var hash = window.location.hash;
+      if (hash && hash.length > 1 && hash[1] === '/') {
+        // Hash looks like #/tools/subnet — restore as real path
+        var path = hash.slice(1); // '/tools/subnet'
+        var base = '/firewall-generator';
+        window.history.replaceState(null, null, base + path);
       }
     })();
   </script>
